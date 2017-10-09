@@ -6,6 +6,7 @@ import spark.Spark;
 import spark.template.freemarker.FreeMarkerEngine;
 
 import static spark.Spark.before;
+import static spark.Spark.halt;
 import static spark.route.HttpMethod.before;
 import static spark.route.HttpMethod.post;
 
@@ -17,11 +18,13 @@ public class ManejadorTemplates {
         FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine(configuration);
 
 
-       before("/home" , ((request, response) ->{
-           UsuarioLogin usuario = request.session().attribute("usuario");
+      before((request, response) -> {
+          boolean aunthenticated;
 
-       } ))
-
+          if (!aunthenticated){
+              halt(401,"No tiene permisos para entrar aqui")
+          }
+      });
 
     }
 }
