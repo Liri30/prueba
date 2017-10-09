@@ -1,0 +1,28 @@
+group 'project.epa'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    // https://mvnrepository.com/artifact/org.apache.spark/spark-core_2.10
+    compile group: 'org.apache.spark', name: 'spark-core_2.10', version: '2.2.0'
+
+    // https://mvnrepository.com/artifact/com.sparkjava/spark-template-freemarker
+    compile group: 'com.sparkjava', name: 'spark-template-freemarker', version: '2.5.5'
+
+
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.42'
+
+     // Pagina Error para Skarp: https://github.com/perwendel/spark-debug-tools
+    //compile 'com.sparkjava:spark-debug-tools:0.5'
+
+
+}
