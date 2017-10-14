@@ -96,6 +96,16 @@
     <h2 class="noDisplay">Main Content</h2>
     <article class="left_article">
       <h3></h3>
+
+
+        <form method="post" action="/index/">
+            <p>Seleccione la fecha</p>
+            <input type="date" name="fechaInicio" placeholder="Fecha inicial">
+            <p>Fecha Final</p>
+            <input type="date" name="fechafin" placeholder="Fecha final">
+            <input type="submit" name="entrar" value="Entrar">
+            <a href="#"></a>
+        </form>
           	
           	<!-- week potency graph-->
           	<head>

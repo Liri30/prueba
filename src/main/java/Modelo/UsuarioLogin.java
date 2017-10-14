@@ -15,6 +15,10 @@ public class UsuarioLogin {
         this.password = password;
     }
 
+    public UsuarioLogin(){
+
+    }
+
     /**Getters and Setters*/
 
     public String getUser() {
