@@ -74,18 +74,9 @@
         <li>FACTURAS</li>
         <li>CONSULTAS </li>
         
-		  <li>CONTACTO<!--<span onmouseover="caret"></span>-->
+		  <li>CONFIGURACION<!--<span onmouseover="caret"></span>-->
 		  
-		  <ul>
-		  	<li>Telefono 
-		  	
-		  		<ul>
-		  			<li>
-		  				829-575-5555
-		  			</li>
-		  		</ul>
-		  	</li>
-		  </ul>
+
 			  
 		  </li> 
      

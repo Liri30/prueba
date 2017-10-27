@@ -4,15 +4,15 @@ import java.sql.Date;
 
 public class Contador {
 
-    private int id;
+
     private java.sql.Date fecha;
     private float potencia;
     private int linea;
 
 
     /**Contructors*/
-    public Contador(int id, Date fecha, float potencia, int linea) {
-        this.id = id;
+    public Contador(java.sql.Date fecha, float potencia, int linea) {
+
         this.fecha = fecha;
         this.potencia = potencia;
         this.linea = linea;
@@ -25,13 +25,7 @@ public class Contador {
 
     /**  Getters and setters*/
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Date getFecha() {
         return fecha;
