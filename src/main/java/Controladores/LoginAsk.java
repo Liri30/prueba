@@ -106,4 +106,39 @@ public class LoginAsk {
 
     }
 
+    /**Inserta correo para usar desde la pagina*/
+    public void insertMail(String email){
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+
+        try{
+            connection = Config.getConnection();
+            preparedStatement = connection.prepareStatement("INSERT INTO usuario(coreo)" +
+                    " VALUE(?) WHERE idUser = 1");
+            preparedStatement.setString(4,email);
+            preparedStatement.executeUpdate();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            if (connection !=null){
+                try{
+                    connection.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+            if (preparedStatement !=null){
+                try{
+                    preparedStatement.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
 }

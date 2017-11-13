@@ -9,7 +9,7 @@
 <div class="loginBox">
     <img src="/img/user.png" class="user">
     <h2>${Bienvenido}</h2>
-    <form method="post" action="/login/">
+    <form method="post" action="/index/">
         <p>Usuario</p>
         <input type="text" name="usuario" placeholder="Enter Email">
         <p>Contraseña</p>

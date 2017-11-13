@@ -69,8 +69,8 @@
     
     <nav class="secondary_header" id="menu">
       <ul class="nav">
-        <li>INICIO</li>
-        <li>ESTADISTICAS</li>
+		  <li><a href="/index"> INICIO</a></li>
+        <li><a href="/Estadistic"> ESTADISTICAS</a></li>
         <li>FACTURAS</li>
         <li>CONSULTAS </li>
         

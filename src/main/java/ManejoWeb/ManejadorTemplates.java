@@ -1,22 +1,23 @@
 package ManejoWeb;
 
+import Controladores.ContadorControlador;
 import Controladores.LoginAsk;
 import Modelo.Contador;
+import Modelo.ContadorMes;
 import Modelo.UsuarioLogin;
 import freemarker.template.Configuration;
 
+import org.apache.commons.beanutils.converters.DateConverter;
 import org.spark_project.jetty.server.Authentication;
-import spark.ModelAndView;
-import spark.Session;
-import spark.Spark;
+import spark.*;
 import spark.template.freemarker.FreeMarkerEngine;
 
 
 import javax.servlet.http.Cookie;
 import java.sql.Date;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static spark.Spark.*;
 import static spark.route.HttpMethod.before;
@@ -30,7 +31,8 @@ public class ManejadorTemplates {
         Configuration configuration = new Configuration(Configuration.VERSION_2_3_23);
         configuration.setClassForTemplateLoading(ManejadorTemplates.class, "/templates");
         FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine(configuration);
-
+        ContadorControlador datos = new ContadorControlador();
+        FuncionesEPA contMes = new FuncionesEPA();
 
         staticFiles.location("");
 
@@ -45,16 +47,31 @@ public class ManejadorTemplates {
           }
       });
         */
+        get("/Home", (request, response) -> {
+            Map<String,Object> attributes = new HashMap<>();
+
+
+
+            List<Contador> ListData = datos.Mostrar();
+
+            //ListData.add(data);
+            //attributes.put("Bienvenido","Bienvenido a EPA");
+            //attributes.put("persons",ListData);
+            attributes.put("listaData", ListData);
+            return new ModelAndView(attributes,"/Home.ftl");
+        },freeMarkerEngine);
 
 
       get("/", (request, response) -> {
           Map<String,Object>attributes = new HashMap<>();
           attributes.put("Bienvenido","Bienvenido a EPA");
           return new ModelAndView(attributes,"Login.ftl");
+
       },freeMarkerEngine);
 
 
-        post("/login/", (request, response) -> {
+        post("/index/", (request, response) -> {
+
 
             Session session = request.session(true);
             String username = request.queryParams("usuario");
@@ -65,6 +82,7 @@ public class ManejadorTemplates {
             if (confirmar == true) {
                 //voy aqui palomo
                 session.attribute("usuario", username);
+                response.cookie("Log","24",3600);
             } else {
                 halt(401, "Credenciales incorrectas, intente de nuevo");
             }
@@ -90,20 +108,66 @@ public class ManejadorTemplates {
             Date date = new Date(cal.getTimeInMillis());
 
             Contador countGprs = new Contador(date,pot,linea);
-
-            /**falta hacer el insert a la base de datos y probar con GPRS*/
+            datos.insert(countGprs);//inserta en la base de datos
 
 
             System.out.println(countGprs.getFecha());
-            return "Datos recibidos del GPRS han sido insertados en la base de datos";
+            return "OK";
 
         });
 
-      //Crear index para procesar formulario del ajax | jquery
+
+        //Formulario que captura el rango de fecha para ver la potencia
+        get("/Estadistic", (request, response) -> {
+            Map<String, Object> var = new HashMap<>();
+
+            Calendar calendar = Calendar.getInstance();
+            Date valorMaxForm = new Date(calendar.getTimeInMillis());
+
+            List<Contador> datosRango = datos.TwoMonthAgo();
+
+            var.put("fechaMax", valorMaxForm);
+            var.put("listaRango",datosRango);
+
+            return new ModelAndView(var, "Estadistic.ftl");
+
+
+        }, freeMarkerEngine);
 
 
 
+        post("/Estadistica", (Request request, Response response) -> {
 
+            Map<String, Object> var = new HashMap<>();
+
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date fecha1 = sdf1.parse(request.queryParams("fechaInicio"));
+            java.util.Date fecha2= sdf1.parse(request.queryParams("fechafin"));
+
+
+            Date dateIni = new Date(fecha1.getTime());
+            Date dateFin = new Date(fecha2.getTime());
+            //System.out.println(fecha1+"\n"+fecha2+"\n"+sdf1.toString());
+
+
+            List<Contador> datosRango = datos.RangoPotenciaFecha(dateIni,dateFin);
+            List<ContadorMes> contando = contMes.PotMes(datosRango);
+            var.put("listaRango",contando);
+
+            for (ContadorMes c: contando
+                 ) {
+
+                System.out.println(c.getMes()+"\n"+ c.getPotenciaMes());
+
+            }
+            //System.out.println(contando.get(1));
+            System.out.println(contando.size());
+
+
+
+            return new ModelAndView(var,"Estadistic.ftl");
+
+        },freeMarkerEngine);
 }
 
 
