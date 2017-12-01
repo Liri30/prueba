@@ -74,7 +74,7 @@
 
         <nav class="secondary_header" id="menu">
             <ul class="nav">
-                <li><a href="/Home"> INICIO</a></li>
+                <li><a href="/index/"> INICIO</a></li>
                 <li><a href="/Estadistic"> ESTADISTICAS</a></li>
                 <li>FACTURAS</li>
                 <li>CONSULTAS </li>
@@ -92,13 +92,13 @@
             <#--Formulario para seleccionar fecha-->
             <table class="container" align="center">
                 <form method="post" action="/Estadistica">
-                    <h3 align="center">Seleccione Fecha</h3>
+                    <h3 align="center">Potencia por mes</h3>
                 <tr>
                     <th>
-                       <input type="date" name="fechaInicio" placeholder="Fecha inicial">
+                       <input type="date" name="fechaInicio" required id="fechaInicio" placeholder="Fecha inicial">
                     </th>
                     <th>
-                        <input type="date" name="fechafin" placeholder="Fecha final">
+                        <input type="date" name="fechafin" required id="fechafin" placeholder="Fecha final">
                     </th>
                     <th>
                         <input type="submit" name="entrar" value="Buscar">

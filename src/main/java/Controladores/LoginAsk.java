@@ -78,7 +78,7 @@ public class LoginAsk {
                 System.out.println(name+pass);
             }
 
-            if (pass.equals(password)){
+            if (pass.equals(password) && name.equals(username)){
                 resultSet.close();
                 return true;
             }
@@ -113,9 +113,8 @@ public class LoginAsk {
 
         try{
             connection = Config.getConnection();
-            preparedStatement = connection.prepareStatement("INSERT INTO usuario(coreo)" +
-                    " VALUE(?) WHERE idUser = 1");
-            preparedStatement.setString(4,email);
+            preparedStatement = connection.prepareStatement("UPDATE usuario SET User = ? WHERE idUser = 1");
+            preparedStatement.setString(1,email);
             preparedStatement.executeUpdate();
         }
         catch (Exception e){
@@ -138,6 +137,54 @@ public class LoginAsk {
                 }
             }
         }
+
+    }
+
+    /**Pregunta por contrasena*/
+    public static boolean askPass(String password){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try{
+            connection = Config.getConnection();
+            preparedStatement = connection.prepareStatement("SELECT contrasena FROM usuario WHERE contrasena=?");
+
+
+            preparedStatement.setString(1, password);
+
+            String name ="", pass="";
+            ResultSet resultSet= preparedStatement.executeQuery();
+            while(resultSet.next()){
+
+                pass = resultSet.getString("contrasena");
+                System.out.println(pass);
+            }
+
+            if (pass.equals(password)){
+                resultSet.close();
+                return true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            try{
+                if (preparedStatement!=null)
+                    preparedStatement.close();
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+            if (connection!=null){
+                try {
+                    connection.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+        }
+
+        return false;
 
     }
 

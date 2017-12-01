@@ -14,70 +14,90 @@
     <schema id="8" parent="1" name="world"/>
     <table id="9" parent="2" name="equipohogar"/>
     <table id="10" parent="2" name="potenciahogar"/>
-    <table id="11" parent="2" name="usuario"/>
-    <column id="12" parent="9" name="idLinea">
+    <table id="11" parent="2" name="precio"/>
+    <table id="12" parent="2" name="usuario"/>
+    <column id="13" parent="9" name="idLinea">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="13" parent="9" name="equipo">
+    <column id="14" parent="9" name="equipo">
       <Position>2</Position>
       <DataType>varchar(45)|0</DataType>
     </column>
-    <column id="14" parent="9" name="on/off">
+    <column id="15" parent="9" name="on/off">
       <Position>3</Position>
       <DataType>enum(&apos;False&apos;, &apos;True&apos;)|0</DataType>
     </column>
-    <key id="15" parent="9" name="PRIMARY">
+    <key id="16" parent="9" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>idLinea</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="16" parent="10" name="Id">
+    <column id="17" parent="10" name="Id">
       <Position>1</Position>
       <DataType>int(128)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="17" parent="10" name="potenciahogar">
+    <column id="18" parent="10" name="potenciahogar">
       <Position>2</Position>
       <DataType>float|0</DataType>
     </column>
-    <column id="18" parent="10" name="Idlinea">
+    <column id="19" parent="10" name="Idlinea">
       <Position>3</Position>
       <DataType>varchar(45)|0</DataType>
     </column>
-    <column id="19" parent="10" name="Fecha">
+    <column id="20" parent="10" name="Fecha">
       <Position>4</Position>
       <DataType>date|0</DataType>
     </column>
-    <index id="20" parent="10" name="Idlinea_idx">
+    <index id="21" parent="10" name="Idlinea_idx">
       <ColNames>Idlinea</ColNames>
     </index>
-    <key id="21" parent="10" name="PRIMARY">
+    <key id="22" parent="10" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="22" parent="11" name="idUser">
+    <column id="23" parent="11" name="idPrecio">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="23" parent="11" name="User">
+    <column id="24" parent="11" name="Rango">
       <Position>2</Position>
       <DataType>varchar(45)|0</DataType>
     </column>
-    <column id="24" parent="11" name="contrasena">
+    <column id="25" parent="11" name="Costo">
+      <Position>3</Position>
+      <DataType>float|0</DataType>
+    </column>
+    <key id="26" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>idPrecio</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="27" parent="12" name="idUser">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="28" parent="12" name="User">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="29" parent="12" name="contrasena">
       <Position>3</Position>
       <DataType>varchar(45)|0</DataType>
     </column>
-    <column id="25" parent="11" name="coreo">
+    <column id="30" parent="12" name="coreo">
       <Position>4</Position>
       <DataType>varchar(60)|0</DataType>
     </column>
-    <key id="26" parent="11" name="PRIMARY">
+    <key id="31" parent="12" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>idUser</ColNames>
       <Primary>1</Primary>

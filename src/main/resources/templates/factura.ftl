@@ -94,78 +94,10 @@
 
 
 
-            <h3>Registrar dirección de correo</h3>
-            <#--<form id="demo" method="get">-->
-            <form id="demo">
-                <div class="form-group">
-                    <label for="EmailD">Correo electrónico nuevo</label>
-                    <input name="correoActual" type="email" class="form-control" required id="correoActual" aria-describedby="emailHelp" placeholder="Enter email">
-                    <small id="emailHelp" class="form-text text-muted">No compartimos su correo con nadie más.</small>
-                </div>
-
-                <div class="form-group">
-                    <label for="contrasena">Contraseña</label>
-                    <input name="pass" type="password" class="form-control" required id="pass" placeholder="Password">
-                </div>
-                <#--<button type="submit" onclick="confirmar()" class="btn btn-primary">Registrar</button>-->
-                <input type="submit" class="btn btn-primary" value="Registrar">
-
-            </form>
 
 
-
-
-            <h3>Registrar fecha de corte</h3>
-            <form id="corte" id"fecha">
-                <div class="form-group">
-                    <label for="dia">Dia de corte</label>
-                    <select name="diaCorte" class="form-control" id="fechacorte"  placeholder="#">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                    </select>
-                    <label for="mes">de cada mes</label>
-                </div>
-                <button type="submit" class="btn btn-primary">Registrar</button>
-            </form>
-
-            <h3>Configurar precios por KWh</h3>
-            <form id="precio">
-                <div class="form-group">
-                    <label for="p1">Menor a 200 KWh</label>
-                    <input type="number" step="any" required id="pr1" class="form-control" placeholder="Precio por KWh">
-                </div>
-                <div class="form-group">
-                    <label for="p2">Mayor a 200 KWh y menor a 300 KWh</label>
-                    <input type="number" step="any" required id="pr2" class="form-control" placeholder="Precio por KWh">
-                </div>
-                <div class="form-group">
-                    <label for="p3">Mayor a 300 KWh y menor a 700 KWh</label>
-                    <input type="number" step="any" required id="pr3" class="form-control" placeholder="Precio por KWh">
-                </div>
-                <div class="form-group">
-                    <label for="p4">Mayor a 700 KWh</label>
-                    <input type="number" step="any" required id="pr4" class="form-control" placeholder="Precio por KWh">
-                </div>
-                <input type="submit" class="btn btn-primary" value="Registrar">
-            </form>
-
-
-
-
-
-
-                <script>
-// Attach a submit handler to the form
+            <script>
+                // Attach a submit handler to the form
                 $( "#demo" ).submit(function( event ) {
 
                     // Stop form from submitting normally
@@ -186,18 +118,18 @@
 
 
                     // Put the results in a div
-                     posting.done(function( data ) {
-                         //lo unico agregado despues que te fuiste
-                         if(data == "true")
-                         {
-                             alert("Su correo ha sido actualizado a "+email+", este también será su nuevo usuario.");
+                    posting.done(function( data ) {
+                        //lo unico agregado despues que te fuiste
+                        if(data == "true")
+                        {
+                            alert("Su correo ha sido actualizado a "+email+", este también será su nuevo usuario.");
                             location.reload();
-                         }
-                         else{
-                             alert("Verifique sus datos para actualizar su correo");
-                         }
-                         console.log(data);
-                     });
+                        }
+                        else{
+                            alert("Verifique sus datos para actualizar su correo");
+                        }
+                        console.log(data);
+                    });
                 });
 
 
@@ -239,6 +171,7 @@
                         console.log(data);
                     });
                 });
+
 
 
             </script>

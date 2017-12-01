@@ -24,5 +24,11 @@ dependencies {
      // Pagina Error para Skarp: https://github.com/perwendel/spark-debug-tools
     //compile 'com.sparkjava:spark-debug-tools:0.5'
 
+    // https://mvnrepository.com/artifact/org.webjars/bootstrap
+    compile group: 'org.webjars', name: 'bootstrap', version: '4.0.0-alpha.5'
+
+    // https://mvnrepository.com/artifact/javax.mail/javax.mail-api
+    compile group: 'javax.mail', name: 'javax.mail-api', version: '1.5.6'
+
 
 }

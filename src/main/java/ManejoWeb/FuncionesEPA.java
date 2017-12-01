@@ -22,55 +22,56 @@ public class FuncionesEPA {
 
 
             int lol = r.getFecha().getMonth();
+            System.out.println(r.getFecha().getMonth());
             switch (lol){
-                case 1: lol= 1;
+                case 0:
                      ene +=r.getPotencia();
                      break;
 
-                case 2: lol = 2;
+                case 1:
                 feb +=r.getPotencia();
                 break;
 
-                case 3:lol=3;
+                case 2:
                 mar+=r.getPotencia();
                 break;
 
-                case 4: lol=4;
+                case 3:
                 abr+=r.getPotencia();
                 break;
 
-                case 5: lol=5;
+                case 4:
                 may+=r.getPotencia();
                 break;
 
-                case 6: lol=6;
+                case 5:
                 jun+=r.getPotencia();
                 break;
 
-                case 7: lol=7;
+                case 6:
                 jul+=r.getPotencia();
                 break;
 
-                case 8: lol=8;
+                case 7:
                 aug+=r.getPotencia();
 
-                case 9: lol=9;
+                case 8:
                 sept+=r.getPotencia();
                     break;
 
-                case 10: lol=10;
+                case 9:
                 oct+=r.getPotencia();
                 break;
 
-                case 11: lol=11;
+                case 10:
                 nov+=r.getPotencia();
                 break;
 
-                case 12:lol=12;
+                case 11:
                 dec+=r.getPotencia();
                 break;
 
-                default: lol=0;
+                default:
                 break;
 
            }
@@ -79,12 +80,14 @@ public class FuncionesEPA {
         }
 
         if (ene != 0){
+            contadorMes = new ContadorMes();
             contadorMes.setMes("Enero");
             contadorMes.setPotenciaMes(ene);
             contadorMesList.add(contadorMes);
         }
 
         if (feb !=0){
+            contadorMes = new ContadorMes();
             contadorMes.setMes("Febrero");
             contadorMes.setPotenciaMes(feb);
             contadorMesList.add(contadorMes);
@@ -92,32 +95,38 @@ public class FuncionesEPA {
         }
 
         if (mar !=0){
+            contadorMes = new ContadorMes();
             contadorMes.setMes("Marzo");
             contadorMes.setPotenciaMes(mar);
             contadorMesList.add(contadorMes);
         }
         if (abr!=0){
+            contadorMes = new ContadorMes();
             contadorMes.setMes("Abril");
             contadorMes.setPotenciaMes(abr);
             contadorMesList.add(contadorMes);
         }
         if (may != 0){
+            contadorMes = new ContadorMes();
             contadorMes.setMes("Mayo");
             contadorMes.setPotenciaMes(may);
             contadorMesList.add(contadorMes);
         }
 
         if (jun!=0){
+            contadorMes = new ContadorMes();
             contadorMes.setMes("Junio");
             contadorMes.setPotenciaMes(jun);
             contadorMesList.add(contadorMes);
         }
         if (jul!=0){
+            contadorMes = new ContadorMes();
             contadorMes.setMes("Julio");
             contadorMes.setPotenciaMes(jul);
             contadorMesList.add(contadorMes);
         }
         if (aug!=0){
+            contadorMes = new ContadorMes();
             contadorMes.setMes("Agosto");
             contadorMes.setPotenciaMes(aug);
             contadorMesList.add(contadorMes);
@@ -141,6 +150,7 @@ public class FuncionesEPA {
             contadorMesList.add(contadorMes);
         }
         if (dec!=0){
+            contadorMes = new ContadorMes();
             contadorMes.setMes("Diciembre");
             contadorMes.setPotenciaMes(dec);
             contadorMesList.add(contadorMes);
@@ -151,4 +161,13 @@ public class FuncionesEPA {
 
 
     }
+
+    /************************************************************************************/
+
+    /**Vamos a hacer la funcion de msj*/
+   public void limite(){
+       
+   }
+
+
 }
