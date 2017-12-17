@@ -1,5 +1,7 @@
 package ManejoWeb;
 
+import Controladores.LoginAsk;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -12,10 +14,12 @@ import javax.mail.*;
 
 public class enviarConGMail {
 
+
+
      public void enviarConGMail(String destinatario, String asunto, String cuerpo) {
         // Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el remitente también.
-        String remitente = "manuelliriano.ml@gmail.com";  //Para la dirección nomcuenta@gmail.com
-         String clave = "turkeylo154md1t";
+        String remitente = "epacore2@gmail.com";  //Para la dirección nomcuenta@gmail.com
+         String clave = "economicpower";
          System.out.println("entre en enviar conGMail");
         Properties props = System.getProperties();
         props.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google
@@ -27,7 +31,7 @@ public class enviarConGMail {
 
         Session session = Session.getDefaultInstance(props);
         MimeMessage message = new MimeMessage(session);
-// Lo que pasa es que java hace reconocimiento de los objetos cuando se los indicas ummm ok
+
         try {
             message.setFrom(new InternetAddress(remitente));
             message.addRecipients(Message.RecipientType.TO, destinatario);
@@ -35,7 +39,7 @@ public class enviarConGMail {
             message.setSubject(asunto);
             message.setText(cuerpo);
             Transport transport = session.getTransport("smtp");
-            transport.connect("smtp.gmail.com", remitente, clave);// nadie se llama clave xD! si lo se
+            transport.connect("smtp.gmail.com", remitente, clave);
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
         }

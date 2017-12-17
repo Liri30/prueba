@@ -19,7 +19,7 @@
 <div class="container">
     <header>
         <div class="primary_header">
-            <h1 class="right_half"><a href="Inicio.html"></a><img src="img\logo.png"  alt="" width="150" height="100" class="columns_center" class = "social_icon"
+            <h1 class="right_half"><a href="Inicio.html"></a><img src="/img/logo.png"  alt="" width="150" height="100" class="columns_center" class = "social_icon"
             /></h1>
         </div>
         <style type="text/css">
@@ -76,8 +76,8 @@
             <ul class="nav">
                 <li><a href="/index/"> INICIO</a></li>
                 <li><a href="/Estadistic"> ESTADISTICAS</a></li>
-                <li>FACTURAS</li>
-                <li>CONSULTAS </li>
+                <li><a href="#"> FACTURAS</a></li>
+                <li><a href="#"> CONSULTAS </a></li>
 
                 <li>CONFIGURACION<!--<span onmouseover="caret"></span>-->                </li>
 

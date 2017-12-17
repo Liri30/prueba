@@ -2,26 +2,36 @@ package ManejoWeb;
 
 import Modelo.Contador;
 import Modelo.ContadorMes;
+import Modelo.Factura;
+import Modelo.Precio;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class FuncionesEPA {
 
-    public List<ContadorMes> PotMes(List<Contador> rango){
+    /**retorna valores por mes complete*/
+
+    public List<ContadorMes> PotMes(List<Contador> rango) throws ParseException {
         List<ContadorMes> contadorMesList = new ArrayList<>();
         ContadorMes contadorMes = new ContadorMes();
+        List<Contador> counter = rango;
 
         float ene = 0, feb = 0, mar = 0, abr = 0;
         float may = 0, jun = 0, jul = 0, aug = 0;
         float sept = 0, oct = 0, nov = 0, dec = 0;
 
+
+
         for (Contador r: rango ) {
 
-
-
             int lol = r.getFecha().getMonth();
+
             System.out.println(r.getFecha().getMonth());
             switch (lol){
                 case 0:
@@ -164,9 +174,20 @@ public class FuncionesEPA {
 
     /************************************************************************************/
 
-    /**Vamos a hacer la funcion de msj*/
-   public void limite(){
-       
+    /**Para retornar la potencia en un rango de fecha*/
+   public Factura potRango(List<Contador> potencia){
+
+       float potenciaAcu = 0;
+       Factura valores = new Factura();
+
+       for (Contador r:potencia) {
+           potenciaAcu += r.getPotencia();
+
+       }
+       valores.setPotencia(potenciaAcu);
+
+       return valores;
+
    }
 
 

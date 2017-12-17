@@ -9,37 +9,42 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 </head>
 <body>
 <div class="loginBox">
     <img src="/img/user.png" class="user">
-    <h2>${Bienvenido}</h2>
-    <form id="login">
+    <h2 style="color: #efed40;">${Bienvenido}</h2>
+<form id="login">
         <p>Usuario</p>
         <input type="email" name="usuario" required id="usuario" placeholder="Enter Email">
         <p>Contraseña</p>
         <input type="Password" name="contrasena" required id="contrasena" placeholder="••••••">
-        <input type="submit" class="btn btn-primary" value="Entrar">
+        <input type="submit" class="btn btn-info btn-lg" value="Entrar">
         <a href="#">Olvide mi contraseña</a>
-    </form>
+</form>
+
+
+
 
     <script>
+
+//        $("").click()
         // Attach a submit handler to the form
-        $( "#login" ).submit(function( event ) {
+         $("#login").submit(function (event) {
 //            // Stop form from submitting normally
             event.preventDefault();
             console.log("Entre");
 
 //            // Get some values from elements on the page:
             var $form = $( this ),
-                    password = $form.find( "input[name='contrasena']" ).val(),
-                    email = $form.find( "input[name='usuario']" ).val()
-//            //url = $form.attr( "http://localhost:4567/post-test" );
-////
-            console.log(email);
-            console.log(password);
-//            // Send the data using post
-//            //var posting = $.post( url, { inputPassword: password, inputEmail: email } );
+//                    password = $("#contrasena").val(),
+//                    email = $("#usuario").val()
+                     password = $form.find("input[name='contrasena']").val(),
+                    email = $form.find("input[name='usuario']").val()
+
             var posting = $.post( "http://localhost:4567/verificar-log", { contrasena: password, usuario: email } );
 
 
@@ -48,7 +53,10 @@
 //                //lo unico agregado despues que te fuiste
                 if(data == "true")
                 {
+                    console.log("esta en el if");
                     window.location.replace("http://localhost:4567/index/");
+                   // window.location.replace("http://localhost:4567/index/");
+
                 }
                 else{
                     alert("Verifique su usuario y contraseña");
@@ -58,7 +66,31 @@
         });
 
 
+
+
     </script>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $("#myBtn").click(function(){
+            $("#myModal").modal();
+        });
+    });
+</script>
+
+
+
+
+<#--Modal-->
+
+
+<#--<div id=”miVentana” style=”position: fixed; width: 350px; height: 190px; top: 0; left: 0; font-family:Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; border: #333333 3px solid; background-color: #FAFAFA; color: #000000; display:none;”>-->
+    <#--Aquí pones tu contenido web-->
+<#--</div>-->
+
+
+
+
 </body>
 </html>

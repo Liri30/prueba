@@ -75,11 +75,11 @@
 
         <nav class="secondary_header" id="menu">
             <ul class="nav">
-                <li><a href="/index"> INICIO</a></li>
+                <li><a href="/index/"> INICIO</a></li>
                 <li><a href="/Estadistic"> ESTADISTICAS</a></li>
-                <li><a href="">FACTURAS</a></li>
-                <li><a href=""> CONSULTAS </a></li>
-                <li><a href=""> CONFIGURACION<!--<span onmouseover="caret"></span>--></a></li>
+                <li><a href="/factura">FACTURAS</a></li>
+                <li><a href="/consulta"> CONSULTAS </a></li>
+                <li><a href="/configuracion"> CONFIGURACION<!--<span onmouseover="caret"></span>--></a></li>
             </ul>
         </nav>
     </header>
