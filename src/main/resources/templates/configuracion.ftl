@@ -30,7 +30,10 @@
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#myCarousel" data-slide-to="1"></li>
             <li data-target="#myCarousel" data-slide-to="2"></li>
-        <#--<li data-target="#myCarousel" data-slide-to="3"></li>-->
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+            <li data-target="#myCarousel" data-slide-to="4"></li>
+            <li data-target="#myCarousel" data-slide-to="5"></li>
+            <li data-target="#myCarousel" data-slide-to="6"></li>
         </ol>
 
         <!-- Wrapper for slides -->
@@ -46,9 +49,18 @@
             <div class="item">
                 <img src="/img/p1.jpg" alt="Ahorra dinero" style="width:100%;">
             </div>
-        <#--<div class="item">-->
-        <#--<img src="/img/p4.jpg" alt="Ahorra dinero" style="width:100%;">-->
-        <#--</div>-->
+            <div class="item">
+                <img src="/img/p5.jpg" alt="Ahorra dinero" style="width:100%;">
+            </div>
+            <div class="item">
+                <img src="/img/p6.jpg" alt="Ahorra dinero" style="width:100%;">
+            </div>
+            <div class="item">
+                <img src="/img/p7.jpg" alt="Ahorra dinero" style="width:100%;">
+            </div>
+        <div class="item">
+        <img src="/img/p4.jpg" alt="Ahorra dinero" style="width:100%;">
+        </div>
         </div>
 
         <!-- Left and right controls -->
@@ -102,6 +114,10 @@
 
 
         <br>
+
+        <div class="col-md-12">
+            <h2>Configure su dispositivo</h2>
+        </div>
 
 <div class="col-md-6">
     <div class="panel panel-default">

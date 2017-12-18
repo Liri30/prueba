@@ -4,17 +4,30 @@ import java.sql.Date;
 
 public class Factura {
     private float potencia;
-    private float precio;
-    private String fecha;
+   private float precio;
+   private Date FechaIni;
+   private Date Fachafin;
+   private float total;
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
 
     public Factura(){
 
-    }
+   }
 
-    public Factura(float potencia, float precio, String fecha) {
+
+    public Factura(float potencia, float precio,float total, Date fechaIni, Date fachafin) {
         this.potencia = potencia;
         this.precio = precio;
-        this.fecha = fecha;
+        this.total = total;
+        FechaIni = fechaIni;
+        Fachafin = fachafin;
     }
 
     public float getPotencia() {
@@ -33,11 +46,19 @@ public class Factura {
         this.precio = precio;
     }
 
-    public String getFecha() {
-        return fecha;
+    public Date getFechaIni() {
+        return FechaIni;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setFechaIni(Date fechaIni) {
+        FechaIni = fechaIni;
+    }
+
+    public Date getFachafin() {
+        return Fachafin;
+    }
+
+    public void setFachafin(Date fachafin) {
+        Fachafin = fachafin;
     }
 }

@@ -51,6 +51,7 @@ Index(freeMarkerEngine);
 Configuracion(freeMarkerEngine);
 PaginaGeneral(freeMarkerEngine);
 Consulta(freeMarkerEngine);
+factura(freeMarkerEngine);
 
 
 /***Get de prueba para introducir datos en tabla*/
@@ -336,88 +337,6 @@ Consulta(freeMarkerEngine);
 
 
 
-        /***************************Pagina de factura**********************************/
-
-
-
-        get("/factura", (request, response) -> {
-            Map<String, Object> var = new HashMap<>();
-            System.out.println("get");
-            return new ModelAndView(var, "facturas.ftl");
-        }, freeMarkerEngine);
-
-
-        post("/factura", (request, response) -> {
-            try {
-
-                System.out.println("post");
-
-                String dateInStart = request.queryParams("startDate");
-                String dateInEnd = request.queryParams("endDate");
-                BuscarPrecio precio = new BuscarPrecio();
-
-                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-                java.util.Date fecha1 = sdf1.parse(dateInStart);
-                java.util.Date fecha2= sdf1.parse(dateInEnd);
-                Date dateIni = new Date(fecha1.getTime());
-                Date dateFin = new Date(fecha2.getTime());
-
-                // System.out.println(dateIni + " " + dateFin);
-
-                ContadorControlador dateList = new ContadorControlador();
-
-                List<Contador> dateListInformation = dateList.intervalDate(dateIni, dateFin);
-                /**Calcular factura a pagar*/
-                float potenciaAcu = 0, result = 0;
-                Factura valores = new Factura();
-
-                for (Contador r: dateListInformation) {
-                    potenciaAcu += r.getPotencia();
-
-                }
-
-
-//                FuncionesEPA potenciaResutl = new FuncionesEPA();
-//                Factura valuelFactura = new Factura();
-
-                if (potenciaAcu<200){
-                    result = potenciaAcu*precio.Menor200();
-
-                }
-                if (potenciaAcu>=200 && potenciaAcu <300){
-                    result = potenciaAcu*precio.Mayor200Menor300();
-                }
-                if (potenciaAcu >=300 && potenciaAcu <700){
-                    result = potenciaAcu*precio.Mayor300Menor700();
-                }
-                if (potenciaAcu >= 700){
-                    result = potenciaAcu*precio.Mayor700();
-                }
-
-
-//                valuelFactura = potenciaResutl.potRango(dateListInformation);
-//                System.out.println(valuelFactura);
-
-                /** Factura = potencia*precio*/
-
-//                return Arrays.toString() ;
-                return result;
-
-            }
-            catch (Exception e){
-                return "error!";           }
-        });
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -512,10 +431,20 @@ public static void Configuracion(FreeMarkerEngine freeMarkerEngine){
 }
 
 public static void Consulta(FreeMarkerEngine freeMarkerEngine){
+
+    before("/consulta-estadistica", (request, response) -> {
+        String ses = request.session().attribute("sesion");
+
+        if (ses ==null){
+            halt(401,"No tiene permisos para estar aqui, favor verifique sus credenciales haciendo <a href="+"/login"+">Login</a>");
+
+        }
+    });
+
     /**Funcion para conseguir las potencian en un intervalo de fecha*/
     get("/consulta-estadistica", (request, response) -> {
         Map<String, Object> var = new HashMap<>();
-        System.out.println("get");
+      //  System.out.println("get");
         return new ModelAndView(var, "consulta.ftl");
 
 
@@ -525,7 +454,7 @@ public static void Consulta(FreeMarkerEngine freeMarkerEngine){
     post("/consulta-estadistica", (request, response) -> {
         try {
 
-            System.out.println("post");
+           // System.out.println("post");
 
             String dateInStart = request.queryParams("startDate");
             String dateInEnd = request.queryParams("endDate");
@@ -571,6 +500,104 @@ public static void Consulta(FreeMarkerEngine freeMarkerEngine){
 
 }
 
+
+public static void factura(FreeMarkerEngine freeMarkerEngine){
+
+    /***************************Pagina de factura**********************************/
+
+    before("/factura", (request, response) -> {
+        String ses = request.session().attribute("sesion");
+
+        if (ses ==null){
+            halt(401,"No tiene permisos para estar aqui, favor verifique sus credenciales haciendo <a href="+"/login"+">Login</a>");
+
+        }
+    });
+
+    get("/factura", (request, response) -> {
+        Map<String, Object> var = new HashMap<>();
+        System.out.println("get");
+        return new ModelAndView(var, "facturas.ftl");
+    }, freeMarkerEngine);
+
+
+    post("/factura", (request, response) -> {
+        try {
+
+            System.out.println("post");
+
+            String dateInStart = request.queryParams("startDate");
+            String dateInEnd = request.queryParams("endDate");
+            BuscarPrecio precio = new BuscarPrecio();
+
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date fecha1 = sdf1.parse(dateInStart);
+            java.util.Date fecha2= sdf1.parse(dateInEnd);
+            Date dateIni = new Date(fecha1.getTime());
+            Date dateFin = new Date(fecha2.getTime());
+
+            // System.out.println(dateIni + " " + dateFin);
+
+            ContadorControlador dateList = new ContadorControlador();
+
+            List<Contador> dateListInformation = dateList.intervalDate(dateIni, dateFin);
+            /**Calcular factura a pagar*/
+            float potenciaAcu = 0, result = 0;
+            Factura valores = new Factura();
+
+            for (Contador r: dateListInformation) {
+                potenciaAcu += r.getPotencia();
+
+            }
+
+
+//                FuncionesEPA potenciaResutl = new FuncionesEPA();
+//                Factura valuelFactura = new Factura();
+
+            if (potenciaAcu<200){
+                result = potenciaAcu*precio.Menor200();
+
+            }
+            if (potenciaAcu>=200 && potenciaAcu <300){
+                result = potenciaAcu*precio.Mayor200Menor300();
+            }
+            if (potenciaAcu >=300 && potenciaAcu <700){
+                result = potenciaAcu*precio.Mayor300Menor700();
+            }
+            if (potenciaAcu >= 700){
+                result = potenciaAcu*precio.Mayor700();
+            }
+            valores.setPotencia(potenciaAcu);
+            valores.setFechaIni(dateIni);
+            valores.setFachafin(dateFin);
+            valores.setPrecio(result/potenciaAcu);
+            valores.setTotal(result);
+
+
+
+            /** Factura = potencia*precio*/
+
+
+            System.out.println(valores.getPotencia());
+            System.out.println(valores.getFachafin());
+            System.out.println(valores.getFechaIni());
+            System.out.println(valores.getPrecio() + valores.getTotal());
+            String valoresResult =  valores.getFechaIni().toString() +','+ valores.getFachafin().toString() +','+Float.toString(valores.getPotencia()) +','+ valores.getPrecio() +','+ valores.getTotal();
+            System.out.println(valoresResult);
+
+
+
+
+//                return Arrays.toString() ;
+            return valoresResult;
+
+        }
+        catch (Exception e){
+            return "error!";           }
+    });
+
+
+}
 
 
 

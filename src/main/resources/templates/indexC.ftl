@@ -19,7 +19,8 @@
         .margin {margin-bottom: 45px;}
         .bg-1 {
             /*background-color: #2C9AB7; !* Green *!*/
-            background-color: black;
+            /*background-color: black;*/
+            background-image: url("/img/p8.jpg");
             color: #ffffff;
         }
         .bg-2 {
