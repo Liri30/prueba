@@ -30,5 +30,24 @@ dependencies {
     // https://mvnrepository.com/artifact/javax.mail/javax.mail-api
     compile group: 'javax.mail', name: 'javax.mail-api', version: '1.5.6'
 
+    // https://mvnrepository.com/artifact/org.jfree/jfreechart
+    compile group: 'org.jfree', name: 'jfreechart', version: '1.0.19'
+
+    // https://mvnrepository.com/artifact/batik/batik-util
+    compile group: 'batik', name: 'batik-util', version: '1.6'
+
+    // https://mvnrepository.com/artifact/batik/batik-dom
+    compile group: 'batik', name: 'batik-dom', version: '1.6'
+
+
+// https://mvnrepository.com/artifact/org.apache.xmlgraphics/batik-svggen
+    compile group: 'org.apache.xmlgraphics', name: 'batik-svggen', version: '1.8'
+
+// https://mvnrepository.com/artifact/org.apache.xmlgraphics/batik-xml
+    compile group: 'org.apache.xmlgraphics', name: 'batik-xml', version: '1.8'
+
+
+
+
 
 }

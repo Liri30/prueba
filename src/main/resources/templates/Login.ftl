@@ -51,7 +51,7 @@
             // Put the results in a div
             posting.done(function( data ) {
 //                //lo unico agregado despues que te fuiste
-                if(data == "true")
+                if(data == true)
                 {
                     console.log("esta en el if");
                     window.location.replace("http://localhost:4567/index/");

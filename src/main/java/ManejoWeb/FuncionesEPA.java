@@ -1,19 +1,20 @@
 package ManejoWeb;
 
-import Modelo.Contador;
-import Modelo.ContadorMes;
-import Modelo.Factura;
-import Modelo.Precio;
+import Controladores.ContadorControlador;
+import Modelo.*;
+import com.twitter.chill.java.ArraysAsListSerializer;
 
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class FuncionesEPA {
+
+
+   static ContadorControlador controlador = new ContadorControlador();
 
     /**retorna valores por mes complete*/
 
@@ -175,7 +176,7 @@ public class FuncionesEPA {
     /************************************************************************************/
 
     /**Para retornar la potencia en un rango de fecha*/
-   public Factura potRango(List<Contador> potencia){
+   public Float potRango(List<Contador> potencia){
 
        float potenciaAcu = 0;
        Factura valores = new Factura();
@@ -186,7 +187,460 @@ public class FuncionesEPA {
        }
        valores.setPotencia(potenciaAcu);
 
+       return potenciaAcu;
+
+   }
+
+
+
+   /***Funcion para generar graficas en base a una semana y enviar mail***/
+   public List<Grafica> Semana(){
+       List<Grafica>valores = new ArrayList<>();
+       Grafica pot = new Grafica();
+       float Lunes = 0, Martes = 0, Miercoles = 0, Jueves = 0;
+       float Viernes = 0, Sabado = 0, Domingo = 0;
+       int j = 0;
+
+
+
+       for (Contador r: controlador.SevenDaysAgo()) {
+           j = r.getFecha().getDay();
+           System.out.println(j+"\n");
+
+           switch (j){
+
+               case 0:
+                   Domingo+=r.getPotencia();
+                   break;
+
+               case 1:
+                   Lunes +=r.getPotencia();
+                   break;
+
+               case 2:
+                   Martes +=r.getPotencia();
+                   break;
+
+               case 3:
+                   Miercoles +=r.getPotencia();
+                   break;
+
+               case 4:
+                   Jueves += r.getPotencia();
+                   break;
+
+               case 5:
+                   Viernes+= r.getPotencia();
+                   break;
+
+               case 6:
+                   Sabado+= r.getPotencia();
+                   break;
+
+
+               default:
+                   break;
+
+           }
+
+
+       }
+//
+//       SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+//
+//
+//       cal.setTime(new java.util.Date());
+//       cal.add(Calendar.DATE, -7);
+//      java.util.Date fecha1 = sdf1.parse(cal);
+
+//
+       Calendar cal = Calendar.getInstance();
+       Date date = new Date(cal.getTimeInMillis());
+//       Date dateControl = new Date(cal.getTimeInMillis());
+//       float pepe = 0;
+//       int y = 0;
+//
+//
+//
+//       int k = date.getDay();
+//
+//
+//
+//       for (Contador c: controlador.SevenDaysAgo()) {
+//
+//           System.out.println(c.getFecha());
+//
+//           for (int i=6;i>=0;i--) {
+//
+//               if (c.getFecha().getDay() == i){
+//                   pepe += c.getPotencia();
+//                   System.out.println(pepe+"Esta es la linea que se esta perdiendo"+ c.getPotencia());
+//               }
+//
+//
+//           }
+//
+//           if (c.getFecha().getDay() != date.getDay()-y){
+//               System.out.println("Esta entrando"+c.getPotencia());
+//
+//               pot.setPot(pepe);
+//               pot.setDia(String.valueOf(c.getFecha().getDate()));
+//               if (y==1 && date.getDay() ==5){
+//                   y=0;
+//               }
+//
+//               if (y==2 && date.getDay() ==4){
+//                   y=0;
+//               }
+//
+//               if (y==3 && date.getDay() ==3){
+//                   y=0;
+//               }
+//               if (y==4 && date.getDay() ==2){
+//                   y=0;
+//               }
+//               if (y==5 && date.getDay() ==1){
+//                   y=0;
+//               }
+//               valores.add(pot);
+//               pot = new Grafica();
+//               pepe=0;
+//               y++;
+//           }
+//
+//
+//
+//       }
+//
+//       System.out.println(cal.getTime().toString()+"Aqui esta lo que busco");
+
+       if(date.getDay() == 0){
+
+
+           pot = new Grafica();
+           pot.setDia("Lunes");
+           pot.setPot(Lunes);
+           valores.add(pot);
+
+           pot = new Grafica();
+           pot.setPot(Martes);
+           pot.setDia("Martes");
+           valores.add(pot);
+
+           pot = new Grafica();
+
+           pot.setDia("Miercoles");
+           pot.setPot(Miercoles);
+
+           valores.add(pot);
+           pot = new Grafica();
+
+           pot.setDia("Jueves");
+           pot.setPot(Jueves);
+
+           valores.add(pot);
+           pot = new Grafica();
+
+           pot.setDia("Viernes");
+           pot.setPot(Viernes);
+
+           valores.add(pot);
+           pot = new Grafica();
+
+
+           pot.setDia("Sabado");
+           pot.setPot(Sabado);
+           valores.add(pot);
+           pot = new Grafica();
+
+           pot.setDia("Domingo");
+           pot.setPot(Domingo);
+           valores.add(pot);
+
+
+       }
+
+       if (date.getDay() == 1){
+
+
+           pot = new Grafica();
+           pot.setPot(Martes);
+           pot.setDia("Martes");
+           valores.add(pot);
+
+           pot = new Grafica();
+
+           pot.setDia("Miercoles");
+           pot.setPot(Miercoles);
+
+           valores.add(pot);
+           pot = new Grafica();
+
+           pot.setDia("Jueves");
+           pot.setPot(Jueves);
+
+           valores.add(pot);
+           pot = new Grafica();
+
+           pot.setDia("Viernes");
+           pot.setPot(Viernes);
+
+           valores.add(pot);
+           pot = new Grafica();
+
+
+           pot.setDia("Sabado");
+           pot.setPot(Sabado);
+           valores.add(pot);
+           pot = new Grafica();
+
+           pot.setDia("Domingo");
+           pot.setPot(Domingo);
+           valores.add(pot);
+
+           pot = new Grafica();
+           pot.setDia("Lunes");
+           pot.setPot(Lunes);
+           valores.add(pot);
+
+       }
+
+       if (date.getDay()==2){
+
+
+
+           pot = new Grafica();
+
+           pot.setDia("Miercoles");
+           pot.setPot(Miercoles);
+
+           valores.add(pot);
+           pot = new Grafica();
+
+           pot.setDia("Jueves");
+           pot.setPot(Jueves);
+
+           valores.add(pot);
+           pot = new Grafica();
+
+           pot.setDia("Viernes");
+           pot.setPot(Viernes);
+
+           valores.add(pot);
+           pot = new Grafica();
+
+
+           pot.setDia("Sabado");
+           pot.setPot(Sabado);
+           valores.add(pot);
+           pot = new Grafica();
+
+           pot.setDia("Domingo");
+           pot.setPot(Domingo);
+           valores.add(pot);
+
+           pot = new Grafica();
+           pot.setDia("Lunes");
+           pot.setPot(Lunes);
+           valores.add(pot);
+
+           pot = new Grafica();
+           pot.setPot(Martes);
+           pot.setDia("Martes");
+           valores.add(pot);
+       }
+
+       if (date.getDay()==3){
+
+
+           pot = new Grafica();
+
+           pot.setDia("Jueves");
+           pot.setPot(Jueves);
+
+           valores.add(pot);
+           pot = new Grafica();
+
+           pot.setDia("Viernes");
+           pot.setPot(Viernes);
+
+           valores.add(pot);
+           pot = new Grafica();
+
+
+           pot.setDia("Sabado");
+           pot.setPot(Sabado);
+           valores.add(pot);
+           pot = new Grafica();
+
+           pot.setDia("Domingo");
+           pot.setPot(Domingo);
+           valores.add(pot);
+
+           pot = new Grafica();
+           pot.setDia("Lunes");
+           pot.setPot(Lunes);
+           valores.add(pot);
+
+           pot = new Grafica();
+           pot.setPot(Martes);
+           pot.setDia("Martes");
+           valores.add(pot);
+
+           pot = new Grafica();
+
+           pot.setDia("Miercoles");
+           pot.setPot(Miercoles);
+
+           valores.add(pot);
+       }
+
+       if (date.getDay()==4){
+
+           pot = new Grafica();
+
+           pot.setDia("Viernes");
+           pot.setPot(Viernes);
+
+           valores.add(pot);
+           pot = new Grafica();
+
+
+           pot.setDia("Sabado");
+           pot.setPot(Sabado);
+           valores.add(pot);
+           pot = new Grafica();
+
+           pot.setDia("Domingo");
+           pot.setPot(Domingo);
+           valores.add(pot);
+
+           pot = new Grafica();
+           pot.setDia("Lunes");
+           pot.setPot(Lunes);
+           valores.add(pot);
+
+           pot = new Grafica();
+           pot.setPot(Martes);
+           pot.setDia("Martes");
+           valores.add(pot);
+
+           pot = new Grafica();
+
+           pot.setDia("Miercoles");
+           pot.setPot(Miercoles);
+
+           valores.add(pot);
+
+           pot = new Grafica();
+
+           pot.setDia("Jueves");
+           pot.setPot(Jueves);
+
+           valores.add(pot);
+       }
+
+       if (date.getDay()==5){
+
+
+           pot = new Grafica();
+
+
+           pot.setDia("Sabado");
+           pot.setPot(Sabado);
+           valores.add(pot);
+           pot = new Grafica();
+
+           pot.setDia("Domingo");
+           pot.setPot(Domingo);
+           valores.add(pot);
+
+           pot = new Grafica();
+           pot.setDia("Lunes");
+           pot.setPot(Lunes);
+           valores.add(pot);
+
+           pot = new Grafica();
+           pot.setPot(Martes);
+           pot.setDia("Martes");
+           valores.add(pot);
+
+           pot = new Grafica();
+
+           pot.setDia("Miercoles");
+           pot.setPot(Miercoles);
+
+           valores.add(pot);
+
+           pot = new Grafica();
+
+           pot.setDia("Jueves");
+           pot.setPot(Jueves);
+
+           valores.add(pot);
+
+           pot = new Grafica();
+
+           pot.setDia("Viernes");
+           pot.setPot(Viernes);
+
+           valores.add(pot);
+       }
+
+
+       if (date.getDay()==6){
+
+           pot = new Grafica();
+
+           pot.setDia("Domingo");
+           pot.setPot(Domingo);
+           valores.add(pot);
+
+           pot = new Grafica();
+           pot.setDia("Lunes");
+           pot.setPot(Lunes);
+           valores.add(pot);
+
+           pot = new Grafica();
+           pot.setPot(Martes);
+           pot.setDia("Martes");
+           valores.add(pot);
+
+           pot = new Grafica();
+
+           pot.setDia("Miercoles");
+           pot.setPot(Miercoles);
+
+           valores.add(pot);
+
+           pot = new Grafica();
+
+           pot.setDia("Jueves");
+           pot.setPot(Jueves);
+
+           valores.add(pot);
+
+           pot = new Grafica();
+
+           pot.setDia("Viernes");
+           pot.setPot(Viernes);
+
+           valores.add(pot);
+
+           pot = new Grafica();
+
+
+           pot.setDia("Sabado");
+           pot.setPot(Sabado);
+           valores.add(pot);
+       }
+
+
+
+
+
        return valores;
+
 
    }
 

@@ -473,10 +473,9 @@ public void menor200(Float costo){
 
     }
 
-
+/***Este query se usa para enviar la potencia acumulada en el mes actual cuando se supera un borde*/
     public float MesActual(){
         float potenciaAcu = 0;
-        //List<Contador> contadors = new ArrayList<>();
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet  = null;
@@ -489,18 +488,9 @@ public void menor200(Float costo){
             while (resultSet.next()){
 
                 potenciaAcu+= resultSet.getFloat("potenciahogar");
-//                Contador contador = new Contador();
-//                contador.setLinea(resultSet.getInt("Idlinea"));
-//                contador.setFecha(resultSet.getDate("Fecha"));
-//                contador.setPotencia(resultSet.getFloat("potenciahogar"));
-//
-//                contadors.add(contador);
+
             }
 
-//            for (Contador r:contadors) {
-//                potenciaAcu += r.getPotencia();
-//
-//            }
 
         }catch (Exception e){
             e.printStackTrace();
@@ -532,8 +522,111 @@ public void menor200(Float costo){
     }
 
 
+    /**Query 7 dias atras de potencia*/
+
+    public List<Contador> SevenDaysAgo(){
+        List<Contador> contadors = new ArrayList<>();
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet  = null;
+
+        try{
+            connection = Config.getConnection();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("select * from potenciahogar where Fecha between date_sub(date(now()), interval 6 day)\n" +
+                    "and now()\n");
+
+            while (resultSet.next()){
+                Contador contador = new Contador();
+                contador.setLinea(resultSet.getInt("Idlinea"));
+                contador.setFecha(resultSet.getDate("Fecha"));
+                contador.setPotencia(resultSet.getFloat("potenciahogar"));
+
+                contadors.add(contador);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (resultSet !=null){
+                try{
+                    resultSet.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if (connection != null){
+                try{
+                    connection.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+            if (statement !=null){
+                try{
+                    statement.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        return contadors;
+
+    }
 
 
 
+
+
+
+
+    public List<Contador> PotenciaDiaActual(){
+        List<Contador> contadors = new ArrayList<>();
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet  = null;
+
+        try{
+            connection = Config.getConnection();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("select * from potenciahogar where Fecha = curdate()");
+
+            while (resultSet.next()){
+                Contador contador = new Contador();
+                contador.setLinea(resultSet.getInt("Idlinea"));
+                contador.setFecha(resultSet.getDate("Fecha"));
+                contador.setPotencia(resultSet.getFloat("potenciahogar"));
+
+                contadors.add(contador);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (resultSet !=null){
+                try{
+                    resultSet.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if (connection != null){
+                try{
+                    connection.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+            if (statement !=null){
+                try{
+                    statement.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        return contadors;
+
+    }
 
 }
